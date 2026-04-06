@@ -36,6 +36,7 @@ try:
     table = pd.DataFrame(data['Dataset'])
     print(table)
     table.to_csv('out.csv')
+    #rename each table so it doesnt right over if i decide to do one indicator at a time 
 
     # print(table)
 
@@ -43,3 +44,6 @@ try:
 
 except Exception as e:
     print(e)
+
+
+    
