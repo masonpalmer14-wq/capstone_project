@@ -4,46 +4,49 @@ import sqlalchemy
 
 
 import urllib.request, json
+import urllib.parse
+
 
 try:
-    url = 'https://api.wto.org/timeseries/v1/data?i=ITS_MTV_AX&r=008,020,040,056,070,100,191,196,203,208,233,234,246,250,276,292,300,304&pc=TO,MACHPH,MAMTOF,MAMTOTEP,MAMTOTTL,MAMTOTIC,MAMTTE,MAMTAU&ps=2016,2017,2018,2020,2021,2022,2023&subscription-key=87bbdaad10714f639190021e13f6a2cf'
-    hdr ={
+    base_url = 'https://api.wto.org/timeseries/v1/data'
+
+    indicators = {
+    "ITS_MTV_AX": "TO",
+    "ITS_MTV_AM": "TO",
+    "ITS_CS_QAX": "S",
+    "ITS_CS_QAM": "S",
+    "TP_A_0010": None   # no pc for tarrif indicator
+}
+
+    for ind, pin in indicators.items():
+    
+        params = {
+            "i": ind,   # changes each loop
+            "r": "124,156,276,356,392,410,484,643,158,826,840", #"r": "124,156,250,276,356,410,484,643,158,826,840",
+            "p": "000",
+            "ps": "2006-2024",
+            "subscription-key": "87bbdaad10714f639190021e13f6a2cf"
+        }
+        if pin is not None:
+            params["pc"] = pin
+        url = base_url + "?" + urllib.parse.urlencode(params)
+
+        hdr ={
     # Request headers
-    'Cache-Control': 'no-cache',
-    'Ocp-Apim-Subscription-Key': '87bbdaad10714f639190021e13f6a2cf',
-    }
-
-    req = urllib.request.Request(url, headers=hdr)
-
-    req.get_method = lambda: 'GET'
-    response = urllib.request.urlopen(req)
-    # print(response.getcode())
-    # print(response.read())
-    raw_data=response.read()
-    # data=response.json()
-    # print(data)
-
-    decoded = raw_data.decode('Latin-1')
-
+        'Cache-Control': 'no-cache',
+        'Ocp-Apim-Subscription-Key': '87bbdaad10714f639190021e13f6a2cf',
+        }
+        req = urllib.request.Request(url, headers=hdr)
+        req.get_method = lambda: 'GET'
+        response = urllib.request.urlopen(req) # print(response.getcode()) # print(response.read())
+        raw_data=response.read()  # data=response.json()   # print(data)
+        decoded = raw_data.decode('Latin-1')
+    
     # # Step 2: load JSON into Python dict
-    data = json.loads(decoded)
-
-    # print(type(data))           # dict
-    # print(data.keys())          # should show 'Dataset'
-    # print(data['Dataset'][0])   # first record
-
-
-    table = pd.DataFrame(data['Dataset'])
-    print(table)
-    table.to_csv('out.csv')
-    #rename each table so it doesnt right over if i decide to do one indicator at a time 
-
-    # print(table)
-
-
-
+        data = json.loads(decoded)   # print(type(data)) - >  dict   print(data.keys()) -> should show 'Dataset'   print(data['Dataset'][0]) -> first record
+        table = pd.DataFrame(data['Dataset'])
+        table.to_csv(f'{ind}.csv', index=False)
+        table["Indicator"] = ind
+        print(f"Processing {ind}")
 except Exception as e:
     print(e)
-
-
-    
