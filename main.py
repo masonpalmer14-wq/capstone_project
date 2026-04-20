@@ -1,6 +1,6 @@
 import pandas as pd
-import requests
-import sqlalchemy
+# import requests
+# import sqlalchemy
 
 import urllib.request, json
 import urllib.parse
@@ -55,3 +55,6 @@ try:
         print(f"Processing {ind}")
 except Exception as e:
     print(e)
+
+
+
