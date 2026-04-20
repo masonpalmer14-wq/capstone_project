@@ -2,30 +2,35 @@ import pandas as pd
 import requests
 import sqlalchemy
 
-
 import urllib.request, json
 import urllib.parse
-
 
 try:
     base_url = 'https://api.wto.org/timeseries/v1/data'
 
     indicators = {
-    "ITS_MTV_AX": "TO",
-    "ITS_MTV_AM": "TO",
-    "ITS_CS_QAX": "S",
-    "ITS_CS_QAM": "S",
-    "TP_A_0010": None   # no pc for tarrif indicator
-}
+        "ITS_MTV_AX": "TO",
+        "ITS_MTV_AM": "TO",
+        "ITS_CS_QAX": "S",
+        "ITS_CS_QAM": "S",
+        "TP_A_0010": None   # no pc and no p for tariff indicator
+    }
 
     for ind, pin in indicators.items():
-    
-        params = {
-            "i": ind,   # changes each loop
-            "r": "124,156,276,356,392,410,484,643,158,826,840", #"r": "124,156,250,276,356,410,484,643,158,826,840",
-            "p": "000",
-            "ps": "2006-2024",
-            "subscription-key": "87bbdaad10714f639190021e13f6a2cf"
+        if ind == "TP_A_0010":
+            params = {
+                "i": ind,
+                "ps": "2006-2024",
+                "subscription-key": "87bbdaad10714f639190021e13f6a2cf"
+                 # ⚠️ no "r", no "p", no "pc"
+           }
+        else:
+            params = {
+                "i": ind,
+                "r": "124,156,276,356,392,410,484,643,158,826,840",
+                "p": "000",
+                "ps": "2006-2024",
+                "subscription-key": "87bbdaad10714f639190021e13f6a2cf"
         }
         if pin is not None:
             params["pc"] = pin
