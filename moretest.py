@@ -1,7 +1,4 @@
 import pandas as pd
-import requests
-import sqlalchemy
-
 import urllib.request, json
 import urllib.parse
 
@@ -34,8 +31,8 @@ try:
         }
         if pin is not None:
             params["pc"] = pin
-        url = base_url + "?" + urllib.parse.urlencode(params)
 
+        url = base_url + "?" + urllib.parse.urlencode(params)
         hdr ={
     # Request headers
         'Cache-Control': 'no-cache',
@@ -43,12 +40,12 @@ try:
         }
         req = urllib.request.Request(url, headers=hdr)
         req.get_method = lambda: 'GET'
-        response = urllib.request.urlopen(req) # print(response.getcode()) # print(response.read())
-        raw_data=response.read()  # data=response.json()   # print(data)
+        response = urllib.request.urlopen(req) 
+        raw_data=response.read() 
         decoded = raw_data.decode('Latin-1')
     
     # # Step 2: load JSON into Python dict
-        data = json.loads(decoded)   # print(type(data)) - >  dict   print(data.keys()) -> should show 'Dataset'   print(data['Dataset'][0]) -> first record
+        data = json.loads(decoded)  
         table = pd.DataFrame(data['Dataset'])
         table.to_csv(f'{ind}.csv', index=False)
         table["Indicator"] = ind
