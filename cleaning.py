@@ -13,4 +13,9 @@ tarrif = pd.read_csv("final_csvs/TP_A_0010.csv")
 # getting heads for each csv works
 
 #finding NULLS
-service_m.info()
+#service_m.info()
+service_m.rename(columns={'ReportingEconomy': 'Country'}) #have to assign to a thing for it to work (service_m = ...)
+print(service_m)
+print(service_m.columns) #lists all column names 
+
+
