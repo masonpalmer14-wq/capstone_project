@@ -29,8 +29,25 @@ Indicator 5: Simple average MFN applied tariff - all products (Percent)
     #TP_A_0010  - tarrifs   
 
 Reporting Econonomies: 
-United States, China, Germany, Chinese Taipei (Taiwan), United Kingdom, India, S.Korea, Russia, Mexico, Canada
+United States, China, European Union, Chinese Taipei (Taiwan), United Kingdom, India, S.Korea, Russia, Mexico, Canada
 Reasoning: All in the top 10 trading partners of the United States. Lacking Viet Nam due to their for data for lacking 2006-2012 of Indicator 4 and 5
+
+numeric country code for each nation: 
+124: Canada
+156: China 
+158: Chinese Taipai (Taiwan)
+356: India
+410: Republic of Korea (South Korea)
+484: Mexico
+643: Russian Federation
+826: United Kingdom
+840: United States of America
+918: European Union 
+
+
+
+Removed: 
+276: Germany (replaced with european union, due to lacking tarrif data from Germany)
 
 Products/Sectors: 
 BOP6 - S - Memo item: Total services
@@ -46,8 +63,7 @@ reasoning: Few countries have reported data past 2024 (2025,2026), many countrie
 
 
 # Next Steps
-- come up with code for cleaning (column reordering, null values etc)
-- bring all the tables together 
+- bring all the tables together (maybe not?)
 - analyze tables in sql 
 - display analysis
 - organize presentation 
@@ -56,3 +72,5 @@ reasoning: Few countries have reported data past 2024 (2025,2026), many countrie
 
 
 Edit code to what have in main.py with the packages i have in requirements.txt, reads the raw json into a csv
+
+
