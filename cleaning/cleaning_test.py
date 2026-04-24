@@ -28,3 +28,12 @@ extra_rows = merch_m_clean[
 ]
 
 print(extra_rows)
+
+#says its rows 76-79 in the merch csvs that are additional 
+#its that the first 4 years if india's data for merch_m and merch_x are missing (2006-2009)
+
+#host: localhost
+#port: 5432
+#user:postgres
+#password:postgres
+

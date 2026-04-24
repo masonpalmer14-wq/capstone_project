@@ -17,5 +17,3 @@ merch_m.to_sql("merch_m_clean", engine, if_exists="replace", index=False)
 merch_m.to_sql("merch_m_clean", engine, if_exists="replace", index=False)
 merch_x.to_sql("merch_x_clean", engine, if_exists="replace", index=False)
 tariff.to_sql("tariff_clean", engine, if_exists="replace", index=False)
-
-
