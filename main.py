@@ -1,6 +1,6 @@
 import pandas as pd
-import requests
-import sqlalchemy
+# import requests
+# import sqlalchemy
 
 import urllib.request, json
 import urllib.parse
@@ -27,7 +27,7 @@ try:
         else:
             params = {
                 "i": ind,
-                "r": "124,156,276,356,392,410,484,643,158,826,840",
+                "r": "124,156,918,356,392,410,484,643,158,826,840",
                 "p": "000",
                 "ps": "2006-2024",
                 "subscription-key": "87bbdaad10714f639190021e13f6a2cf"
@@ -55,3 +55,5 @@ try:
         print(f"Processing {ind}")
 except Exception as e:
     print(e)
+
+
