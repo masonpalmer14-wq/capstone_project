@@ -103,7 +103,6 @@ Overview: using the localhost connection from Docker and the tables created in D
 2. Create a new dashboard
 3. Use the folder containing analytics from postgres to create new graphs.
 4. Save graphs to the dashboard
-5. 
 
 
 
