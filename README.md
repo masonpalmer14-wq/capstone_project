@@ -91,7 +91,19 @@ Overview: postgres.py loads cleaned trade and tariff datasets into a PostgreSQL 
 3. Upload each dataset as a table
 4. Replace tables if they already exist (if_exists="replace")
 
+# Step 5 capstone.sql
+Overview: postgres loads datasets into DataGrip data source for use in further cleaning and table creation
+1. Create a new data source in DataGrip
+2. Use password postgres to establish connection
+3. Use SQL queries to generate tables
 
+# Step 6 Metabase
+Overview: using the localhost connection from Docker and the tables created in DataGrip, create graphs in Metabase.
+1. Log in to Metabase
+2. Create a new dashboard
+3. Use the folder containing analytics from postgres to create new graphs.
+4. Save graphs to the dashboard
+5. 
 
 
 
